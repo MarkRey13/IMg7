@@ -18,17 +18,50 @@ body {
 
 .container {
     position: relative;
-    width: 420px;
+    width: 410px;
     height: 420px;
     background: seagreen;
     border-radius: 10px;
     color: #fff;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    transition: height .2s ease;
+
+}
+
+.container.active {
+    height: 520px;
 }
 
 .container .formBox {
     width: 100%;
     padding: 40px;
 }
+
+
+.container .formBoxReg {
+    position: absolute;
+    transition: none;
+    translate: 400px;
+}
+
+
+.container.active .formBoxLogin{
+    transition: none;
+    translate: -400px;
+}
+
+.container.active .formBoxReg{
+    transition: translate .18s ease;
+    translate: 0;
+}
+.container .formBoxLogin{
+    transition: translate .18s ease;
+    translate: 0;
+}
+
+
 
 form h1{
     font-size: 2rem;
@@ -63,13 +96,14 @@ form .inputBox {
     color:#fff;
 }
 
-.inputBox .icon {
+/*.inputBox .icon {
     position: absolute;
     right: 65px;
     bottom: 62.5%;
     translate: 0-50%;
    
 }
+
 
 .inputBox .icon2 {
     position: absolute;
@@ -78,6 +112,7 @@ form .inputBox {
     translate: 0-50%;
    
 }
+*/
 
 
 form .rememberForgot {
