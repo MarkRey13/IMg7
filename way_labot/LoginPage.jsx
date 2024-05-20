@@ -1,6 +1,8 @@
+/*
 import React, { useState } from 'react'
-import './LoginPage.css';
-import { FaUser, FaLock } from "react-icons/fa";
+//import './LoginPage.css';
+//import { FaUser, FaLock } from "react-icons/fa";
+import {Container, Box, TextField, Button, Typography} from '@mui/material';
 
 
 const LoginPage = () => {
@@ -60,7 +62,7 @@ const LoginPage = () => {
                     <button type="submit">Register</button>
                 <div className="registerLink">
                     <p>Already have an account?
-                    <a href="#" onClick={loginLink}> Login</a></p>
+                    <a href="#" onClick={loginLink}> Login</a></p> 
                 </div>
             </form>
         </div>
@@ -69,4 +71,9 @@ const LoginPage = () => {
   )
 }
 
+
 export default LoginPage;
+
+//Login page nga name every mag kuan click 
+
+*/
