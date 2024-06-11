@@ -4,9 +4,8 @@ export default function Copyright(props) {
   return (
   <Typography variant="body2" color="text.secondary" align="center" {...props}>
   {'Copyright © '}
-  <Link color="inherit" href="https://mui.com/">
-    Ayop Demo
-  </Link>{' '}
+
+    Group 8 - PIT: WEB SYSTEMS AND IM 
   {new Date().getFullYear()}
   {'.'}
 </Typography>

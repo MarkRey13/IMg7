@@ -18,6 +18,8 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
+import {Outlet } from 'react-router-dom';
+
 import { mainListItems, secondaryListItems } from '../Components/NavList';
 import Copyright from '../Components/Copyright';
 
@@ -121,7 +123,7 @@ export default function Dashboard() {
             </IconButton>
             <Button color="inherit" onClick={handleLogout}>
               Logout
-            </Button>
+            </Button> 
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -162,7 +164,7 @@ export default function Dashboard() {
             <Grid container>
               <Grid item xs={12}>
                 <Paper sx={{ p: 4 }}>
-                  Main
+                  <Outlet/>
                 </Paper>
               </Grid>
             </Grid>
