@@ -22,20 +22,20 @@ export const mainListItems = (
       <ListItemIcon>
         <ShoppingCartIcon />
       </ListItemIcon>
-      <ListItemText primary="Users" />
+      <ListItemText primary="Patients" />
     </ListItemButton>
     
     <ListItemButton>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="Settings" />
+      <ListItemText primary="Wards" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
-      <ListItemText primary="Reports" />
+      <ListItemText primary="Other" />
     </ListItemButton>
     
   </React.Fragment>
