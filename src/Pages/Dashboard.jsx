@@ -18,8 +18,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
-import {Outlet } from 'react-router-dom';
-
+import { Outlet } from 'react-router-dom';
 import { mainListItems, secondaryListItems } from '../Components/NavList';
 import Copyright from '../Components/Copyright';
 
@@ -54,6 +53,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
         duration: theme.transitions.duration.enteringScreen,
       }),
       boxSizing: 'border-box',
+      display: 'flex',  // Added line
+      flexDirection: 'column',  // Added line
       ...(!open && {
         overflowX: 'hidden',
         transition: theme.transitions.create('width', {
@@ -121,9 +122,6 @@ export default function Dashboard() {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            <Button color="inherit" onClick={handleLogout}>
-              Logout
-            </Button> 
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -140,11 +138,23 @@ export default function Dashboard() {
             </IconButton>
           </Toolbar>
           <Divider />
-          <List component="nav">
+          <List component="nav" sx={{ flexGrow: 1 }}>
             {mainListItems}
             <Divider sx={{ my: 1 }} />
             {secondaryListItems}
           </List>
+          <Button
+            color="inherit"
+            onClick={handleLogout}
+            sx={{
+              mt: 'auto',  
+              mb: 2,  
+              mx: 'auto',  
+              width: '90%',  
+            }}
+          >
+            Logout
+          </Button>
         </Drawer>
         <Box
           component="main"
@@ -159,18 +169,16 @@ export default function Dashboard() {
           }}
         >
           <Toolbar />
-          {/*Main Content*/}
           <Container maxWidth="false" sx={{ mt: 4, mb: 4 }}>
             <Grid container>
               <Grid item xs={12}>
                 <Paper sx={{ p: 4 }}>
-                  <Outlet/>
+                  <Outlet />
                 </Paper>
               </Grid>
             </Grid>
             <Copyright sx={{ pt: 4 }} />
           </Container>
-          {/*Main Content*/}
         </Box>
       </Box>
     </ThemeProvider>

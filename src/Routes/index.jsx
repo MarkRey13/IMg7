@@ -8,7 +8,7 @@ import Others from "../Pages/Others";
 
 const routes = [
     {
-        path: "/",
+        path: "/login",
         element: <Login />
     },
     {
