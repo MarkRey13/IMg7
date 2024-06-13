@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -20,7 +20,7 @@ import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import { mainListItems, secondaryListItems } from '../Components/NavList';
-import Copyright from '../Components/Copyright';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
 
 const drawerWidth = 240;
 
@@ -32,6 +32,7 @@ const AppBar = styled(MuiAppBar, {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
+  backgroundColor: theme.palette.mode === 'dark' ? '#333' : '#b2dfdb', // Updated navbar color
   ...(open && {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
@@ -53,8 +54,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
         duration: theme.transitions.duration.enteringScreen,
       }),
       boxSizing: 'border-box',
-      display: 'flex',  // Added line
-      flexDirection: 'column',  // Added line
+      display: 'flex',
+      flexDirection: 'column',
+      backgroundColor: theme.palette.mode === 'dark' ? '#333' : '#fff', // Set background color based on theme mode
       ...(!open && {
         overflowX: 'hidden',
         transition: theme.transitions.create('width', {
@@ -70,11 +72,43 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-// TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme();
+const lightTheme = createTheme({
+  palette: {
+    mode: 'light',
+    background: {
+      default: '#ffffff', // Updated background color
+    },
+    primary: {
+      main: '#b2dfdb', // Green color for primary elements
+    },
+  },
+});
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    background: {
+      default: '#333', // Updated background color for the main content area
+    },
+    primary: {
+      main: '#b2dfdb', // Green color for primary elements
+    },
+  },
+  components: {
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: '#333', // Set background color of the sidebar to dark
+        },
+      },
+    },
+  },
+});
+
 
 export default function Dashboard() {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(true);
+  const [themeMode, setThemeMode] = useState('light'); // State to track theme mode
   const navigate = useNavigate();
 
   const toggleDrawer = () => {
@@ -82,14 +116,18 @@ export default function Dashboard() {
   };
 
   const handleLogout = () => {
-    // Perform any logout logic here, if necessary
     navigate('/login'); // Navigate to the login page
   };
 
+  const toggleThemeMode = () => {
+    const newMode = themeMode === 'light' ? 'dark' : 'light';
+    setThemeMode(newMode);
+  };
+
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={themeMode === 'light' ? lightTheme : darkTheme}>
+      <CssBaseline />
       <Box sx={{ display: 'flex' }}>
-        <CssBaseline />
         <AppBar position="absolute" open={open}>
           <Toolbar
             sx={{
@@ -117,6 +155,9 @@ export default function Dashboard() {
             >
               Dashboard
             </Typography>
+            <IconButton color="inherit" onClick={toggleThemeMode}>
+              <Brightness4Icon />
+            </IconButton>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
@@ -144,15 +185,19 @@ export default function Dashboard() {
             {secondaryListItems}
           </List>
           <Button
-            color="inherit"
-            onClick={handleLogout}
-            sx={{
-              mt: 'auto',  
-              mb: 2,  
-              mx: 'auto',  
-              width: '90%',  
-            }}
-          >
+    onClick={handleLogout}
+    sx={{
+        mt: 'auto',
+        mb: 2,
+        mx: 'auto',
+        width: '90%',
+        bgcolor: themeMode === 'light' ? '#b2dfdb' : '#333', // Set the background color based on theme mode
+        '&:hover': {
+            bgcolor: themeMode === 'light' ? '#f50057' : 'f50057', // Change hover color based on theme mode
+        },
+        color: themeMode === 'light' ? 'inherit' : '#fff', // Set text color based on theme mode
+    }}
+>
             Logout
           </Button>
         </Drawer>
@@ -160,9 +205,7 @@ export default function Dashboard() {
           component="main"
           sx={{
             backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
+              theme.palette.background.default,
             flexGrow: 1,
             height: '100vh',
             overflow: 'auto',
@@ -177,7 +220,6 @@ export default function Dashboard() {
                 </Paper>
               </Grid>
             </Grid>
-            <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>
       </Box>

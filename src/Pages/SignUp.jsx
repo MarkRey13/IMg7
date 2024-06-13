@@ -130,7 +130,19 @@ const SignUp = () => {
                     <Checkbox checked={agreed} onChange={(e) => setAgreed(e.target.checked)} />
                     <Typography>I agree to the terms and conditions</Typography>
                 </Box>
-                <Button fullWidth variant="contained" color="primary" type="submit" sx={{ mt: 2, backgroundColor: '#eb3d94', '&:hover': { backgroundColor: '#f04fc8', }, }}>Register</Button>
+                <Button
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    sx={{
+                        mt: 2,
+                        backgroundColor: '#b2dfdb', // Changed color here
+                        '&:hover': { backgroundColor: '#26a69a' }, // Change hover color if needed
+                    }}
+                >
+                    Register
+                </Button>
                 <Typography variant="body2" align="center" sx={{ mt: 2 }}>
                     Already have an account?
                     <Link href="/Login" underline="none"> Login</Link>

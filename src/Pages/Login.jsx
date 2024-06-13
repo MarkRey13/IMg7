@@ -30,15 +30,21 @@ export default function Login() {
     };
 
     return (
-        <Container maxWidth="xs" className="formContainer">
-            <Box component="form" noValidate autoComplete="off" >
+        <Container maxWidth="xs" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+            <Box
+                sx={{
+                    backgroundColor: '#fff',
+                    padding: 3,
+                    borderRadius: 2,
+                    boxShadow: 3,
+                }}
+            >
                 <Typography variant="h4" component="h1" gutterBottom>Login Form</Typography>
-                {
-                    isError && 
+                {isError && (
                     <Box>
                         <Typography color="error" align="center">{errorMessage}</Typography>
                     </Box>
-                }
+                )}
                 <TextField
                     fullWidth
                     margin="normal"
@@ -61,19 +67,17 @@ export default function Login() {
                         <Checkbox />
                         <Typography>Remember Me</Typography>
                     </Box>
-                    <Link href="#" underline="none">Forgot Password?</Link>
+                    <Link to="#" underline="none">Forgot Password?</Link>
                 </Box>
                 <Button
                     fullWidth
                     variant="contained"
                     color="primary"
-                    onClick = {login}
-                
-                    
+                    onClick={login}
                     sx={{
-                        mb: 2,
-                        backgroundColor: '#eb3d94',
-                        '&:hover': { backgroundColor: '#f04fc8' },
+                        mt: 2,
+                        backgroundColor: '#b2dfdb',
+                        '&:hover': { backgroundColor: '#26a69a' },
                     }}
                 >
                     Login
